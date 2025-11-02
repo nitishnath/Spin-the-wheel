@@ -4,7 +4,10 @@ import { addPoints } from '../features/walletSlice.js'
 import { logout, setSessionPlayed } from '../features/authSlice.js'
 import SpinWheel from '../components/SpinWheel.jsx'
 import { useAppDispatch, useAppSelector } from '../store/hooks.js'
+import { celebrate } from '../lib/confetti.js'
 import styles from './Play.module.scss'
+import ThemeToggle from '../components/ThemeToggle.jsx'
+import { Common } from '../components/common.jsx'
 
 export default function Play() {
   const mobile = useAppSelector((s) => s.auth.mobile)
@@ -27,6 +30,8 @@ export default function Play() {
       dispatch(addPoints(reward.points))
       dispatch(setSessionPlayed(true))
       setToast(`You got: ${reward.label} +${reward.points}`)
+      // Trigger a small celebration for the win
+      celebrate({ duration: 1600, particleCount: 120 })
     } catch {
       setToast('Failed to play. Please try again later.')
     } finally {
@@ -36,13 +41,21 @@ export default function Play() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Spin the Wheel</h1>
+      <header className={styles.header}>
+        <section className={styles.headerSection}>
+          <Common />
+          <h1 className={styles.title}>Spin the Wheel</h1>
+        </section>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <ThemeToggle />
+          { played && <button className={styles.logoutButton} onClick={() => dispatch(logout())}>Logout</button>}
+        </div>
+        </header>
       <div className={styles.card}>
         <SpinWheel onSpinEnd={performPlay} disabled={played || loading} />
         {played && (
           <div>
             <p className={styles.hint} role="status">Only one play per session. Come back after re-login.</p>
-            <button className="button" onClick={() => dispatch(logout())}>Logout</button>
           </div>
         )}
         {toast && <div className={styles.toast} role="alert" aria-live="polite">{toast}</div>}

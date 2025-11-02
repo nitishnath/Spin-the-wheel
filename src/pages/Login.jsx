@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAppDispatch } from '../store/hooks.js'
 import styles from './Login.module.scss'
+import ThemeToggle from '../components/ThemeToggle.jsx'
 
 export default function Login() {
   const [mobile, setMobileInput] = useState('')
@@ -38,8 +39,13 @@ export default function Login() {
 
   return (
     <main className="container">
-      <h1 className="title">Welcome</h1>
-      <p className="subtitle">Login with your mobile number</p>
+      <header className="header">
+        <div>
+          <h1 className="title">Welcome</h1>
+          <p className="subtitle">Login with your mobile number</p>
+        </div>
+        <ThemeToggle />
+      </header>
       <form onSubmit={onSubmit} className="card" aria-label="Login form">
         <label htmlFor="mobile">Mobile Number</label>
         <input
@@ -51,7 +57,7 @@ export default function Login() {
           placeholder="e.g. 9876543210"
           value={mobile}
           onChange={(e) => setMobileInput(e.target.value)}
-          aria- invalid={!!error}
+          aria-invalid={!!error}
           aria-describedby={error ? 'mobile-error' : undefined}
         />
         {error && (

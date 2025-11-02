@@ -10,16 +10,6 @@
     gap: 0.5rem;
 }
 
-.back {
-    background: transparent;
-    border: none;
-    color: #3b82f6;
-    cursor: pointer;
-    font-size: 1.25rem;
-    line-height: 1;
-    padding: 0.25rem;
-}
-
 .back:hover {
     color: #60a5fa;
 }
@@ -30,8 +20,8 @@
 }
 
 .card {
-    background: #111827;
-    border: 1px solid #1f2937;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem;
     margin: 1rem 0;
@@ -48,7 +38,7 @@
 .reward-item {
     display: grid;
     gap: 0.5rem;
-    border: 1px solid #1f2937;
+    border: 1px solid var(--border);
     padding: 0.75rem;
     border-radius: 8px;
 }
@@ -62,26 +52,26 @@
 .reward-sub {
     display: flex;
     justify-content: space-between;
-    color: #94a3b8;
+    color: var(--muted);
 }
 
 .chip {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
     border-radius: 999px;
-    border: 1px solid #1f2937;
+    border: 1px solid var(--border);
 }
 
 .chip.earned {
-    background: #064e3b;
-    color: #a7f3d0;
+    background: var(--primary);
+    color: var(--primary-text);
 }
 
 .chip.pending {
-    background: #3f3f46;
-    color: #e4e4e7;
+    background: var(--input-bg);
+    color: var(--text);
 }
 
 .points-delta {
-    color: #e5e7eb;
+    color: var(--text);
 }

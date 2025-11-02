@@ -4,26 +4,49 @@
     padding: 1rem;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerSection {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+
+.logoutButton {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--border);
+    color: var(--text);
+    cursor: pointer;
+}
+
 .title {
     font-size: 1.5rem;
     margin: 0.5rem 0;
 }
 
 .card {
-    background: #111827;
-    border: 1px solid #1f2937;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem;
     margin: 1rem 0;
 }
 
 .hint {
-    color: #94a3b8;
+    color: var(--muted);
 }
 
 .toast {
     margin-top: 0.5rem;
-    background: #1f2937;
+    background: var(--border);
     border-radius: 8px;
     padding: 0.5rem;
 }

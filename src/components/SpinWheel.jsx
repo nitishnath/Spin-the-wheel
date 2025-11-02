@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import './SpinWheel.scss'
 
+//This function checks if the user prefers reduced motion and returns a boolean value, true if the user prefers reduced motion, false otherwise.
 function prefersReducedMotion() {
   if (typeof window === 'undefined') return false
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -21,6 +22,8 @@ export default function SpinWheel({ onSpinEnd, disabled }) {
   const wheelRef = useRef(null)
   const reduced = useMemo(prefersReducedMotion, [])
 
+  //This useEffect listens for the transitionend event on the wheel element when spinning is false.
+  //When the event is triggered, it calculates the selected segment based on the final angle and calls the onSpinEnd callback with the selected segment.
   useEffect(() => {
     if (!spinning) return
     const el = wheelRef.current
@@ -45,13 +48,16 @@ export default function SpinWheel({ onSpinEnd, disabled }) {
     return () => el.removeEventListener('transitionend', handler)
   }, [spinning, angle, onSpinEnd])
 
+  // This handleSpin function is called when the spin button is clicked.
   const handleSpin = () => {
-    if (disabled || spinning) return
-    setSpinning(true)
+    if (disabled || spinning) return // Disable while spinning or if disabled
+    setSpinning(true) // Set spinning to true to disable the button
     // Spin 2-4 full rotations plus a random offset 0-360
     const baseTurns = 720 + Math.floor(Math.random() * 720) // 2-4 turns
-    const offset = Math.floor(Math.random() * 360)
-    const next = angle + baseTurns + offset
+    const offset = Math.floor(Math.random() * 360) // Random offset 0-360
+    const next = angle + baseTurns + offset // Calculate next angle
+
+    // Calculate selected segment based on final angle
     if (reduced) {
       // With reduced motion, jump instantly and finish
       setAngle(next)

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks.js'
 import styles from './OTP.module.scss'
+import ThemeToggle from '../components/ThemeToggle.jsx'
 
 export default function OTP() {
   const mobile = useAppSelector((s) => s.auth.mobile)
@@ -53,8 +54,13 @@ export default function OTP() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Enter OTP</h1>
-      <p className={styles.subtitle}>Sent to {mobile}</p>
+      <header className="header">
+        <div>
+          <h1 className={styles.title}>Enter OTP</h1>
+          <p className={styles.subtitle}>Sent to {mobile}</p>
+        </div>
+        <ThemeToggle />
+      </header>
       <form onSubmit={onSubmit} className={styles.card} aria-label="OTP form">
         <label htmlFor="otp">One-Time Password</label>
         <input

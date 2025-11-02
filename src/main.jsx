@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import store from './store/index.js'
 import { StoreProvider } from './store/provider.jsx'
+import { ThemeProvider } from './theme/ThemeProvider.jsx'
 import App from './App.jsx'
 import './styles/app.scss'
 
@@ -16,7 +17,9 @@ enableMocking().finally(() => {
   createRoot(document.getElementById('root')).render(
     <StrictMode>
       <StoreProvider store={store}>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </StoreProvider>
     </StrictMode>,
   )

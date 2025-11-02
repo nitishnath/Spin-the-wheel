@@ -10,13 +10,13 @@
 }
 
 .subtitle {
-  color: #94a3b8;
+  color: var(--muted);
   margin-bottom: 1rem;
 }
 
 .card {
-  background: #111827;
-  border: 1px solid #1f2937;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1rem;
   margin: 1rem 0;
@@ -29,11 +29,11 @@ label {
 
 input {
   width: 100%;
-  background: #0b1220;
-  border: 1px solid #1f2937;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.75rem;
-  color: #e5e7eb;
+  color: var(--text);
 }
 
 .error {
@@ -42,8 +42,8 @@ input {
 }
 
 .button {
-  background: #3b82f6;
-  color: white;
+  background: var(--primary);
+  color: var(--primary-text);
   border: none;
   margin-top: 1rem;
   border-radius: 8px;

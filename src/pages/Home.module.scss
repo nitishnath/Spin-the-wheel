@@ -16,12 +16,12 @@
 }
 
 .subtitle {
-    color: #94a3b8;
+    color: var(--muted);
 }
 
 .card {
-    background: #111827;
-    border: 1px solid #1f2937;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem;
     margin: 1rem 0;
@@ -32,10 +32,12 @@
     font-weight: 600;
 }
 
-.link {
-    background: transparent;
-    color: #3b82f6;
-    border: none;
+.logoutButton {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--border);
+    color: var(--text);
     cursor: pointer;
 }
 

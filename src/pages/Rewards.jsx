@@ -1,15 +1,15 @@
 import { useAppSelector } from '../store/hooks.js'
-import { useNavigate } from 'react-router-dom'
+import { Common } from '../components/common.jsx'
+
 import styles from './Rewards.module.scss'
 
 export default function Rewards() {
   const rewards = useAppSelector((s) => s.rewards.list)
-  const navigate = useNavigate()
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <button className={styles.back} onClick={() => navigate(-1)} aria-label="Go back">←</button>
+        <Common />
         <h1 className={styles.title}>Rewards History</h1>
       </header>
       <section className={styles.card}>

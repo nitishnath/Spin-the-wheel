@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { logout } from '../features/authSlice.js'
 import { useAppSelector, useAppDispatch } from '../store/hooks.js'
 import styles from './Home.module.scss'
+import ThemeToggle from '../components/ThemeToggle.jsx'
 
 export default function Home() {
   const user = useAppSelector((s) => s.auth.user)
@@ -17,7 +18,10 @@ export default function Home() {
           <h1 className={styles.title}>Dashboard</h1>
           <p className={styles.subtitle}>{user?.name} — {mobile}</p>
         </div>
-        <button className={styles.link} onClick={() => dispatch(logout())}>Logout</button>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <ThemeToggle />
+          <button className={styles.logoutButton} onClick={() => dispatch(logout())}>Logout</button>
+        </div>
       </header>
 
       <section className={styles.card}>
