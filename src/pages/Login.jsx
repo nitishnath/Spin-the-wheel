@@ -12,6 +12,7 @@ export default function Login() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
+  // Handle form submission for login
   const onSubmit = async (e) => {
     e.preventDefault()
     setError('')

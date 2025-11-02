@@ -4,6 +4,7 @@ const initialState = {
   points: 0,
 }
 
+// Create the wallet slice using createSlice from Redux Toolkit
 const walletSlice = createSlice({
   name: 'wallet',
   initialState,

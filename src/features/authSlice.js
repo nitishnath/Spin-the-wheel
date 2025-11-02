@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+// Define the initial state for the auth slice
 const initialState = {
   isAuthenticated: false,
   user: null,
@@ -7,6 +7,7 @@ const initialState = {
   sessionPlayed: false,
 }
 
+// Create the auth slice using createSlice from Redux Toolkit
 const authSlice = createSlice({
   name: 'auth',
   initialState,

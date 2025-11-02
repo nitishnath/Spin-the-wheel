@@ -4,6 +4,7 @@ const initialState = {
   list: [],
 }
 
+// Create the rewards slice using createSlice from Redux Toolkit
 const rewardsSlice = createSlice({
   name: 'rewards',
   initialState,

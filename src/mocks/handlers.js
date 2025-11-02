@@ -6,6 +6,7 @@ import { colorPointsMap } from '../lib/colorPoints.js'
 let mockUser = null
 const db = new Map() // mobile -> { walletPoints: number, rewards: array }
 
+// Helper function to ensure user state exists in the mock database
 function ensureUserState(mobile) {
   const key = String(mobile || '')
   if (!key) return null
@@ -15,7 +16,10 @@ function ensureUserState(mobile) {
   return db.get(key)
 }
 
+// Mock handlers for login, OTP verification, profile, wallet, and rewards endpoints
 export const handlers = [
+
+  // Mock login endpoint
   http.post('/api/login', async ({ request }) => {
     const body = await request.json()
     const { mobile } = body || {}
@@ -25,6 +29,8 @@ export const handlers = [
     ensureUserState(mobile)
     return HttpResponse.json({ ok: true })
   }),
+
+  // Mock OTP verification endpoint
   http.post('/api/verify-otp', async ({ request }) => {
     const body = await request.json()
     const { mobile, otp } = body || {}
@@ -34,22 +40,30 @@ export const handlers = [
     ensureUserState(mobile)
     return HttpResponse.json({ user: mockUser })
   }),
+
+  // Mock profile endpoint
   http.get('/api/profile', () => {
     if (!mockUser) return HttpResponse.json({ error: 'unauth' }, { status: 401 })
     return HttpResponse.json({ user: mockUser })
   }),
+
+  // Mock wallet endpoint
   http.get('/api/wallet', () => {
     const mobile = mockUser?.mobile
     const state = ensureUserState(mobile)
     if (!state) return HttpResponse.json({ error: 'unauth' }, { status: 401 })
     return HttpResponse.json({ points: state.walletPoints })
   }),
+
+  // Mock rewards endpoint
   http.get('/api/rewards', () => {
     const mobile = mockUser?.mobile
     const state = ensureUserState(mobile)
     if (!state) return HttpResponse.json({ error: 'unauth' }, { status: 401 })
     return HttpResponse.json({ rewards: state.rewards })
   }),
+
+  // Mock game play endpoint
   http.post('/api/game/play', async ({ request }) => {
     const body = await request.json().catch(() => ({}))
     const mobile = body?.mobile || mockUser?.mobile

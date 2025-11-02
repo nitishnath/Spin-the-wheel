@@ -6,6 +6,7 @@ import { ThemeProvider } from './theme/ThemeProvider.jsx'
 import App from './App.jsx'
 import './styles/app.scss'
 
+// Enable mocking in development mode
 async function enableMocking() {
   if (import.meta.env.DEV) {
     const { worker } = await import('./mocks/browser.js')

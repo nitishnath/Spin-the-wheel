@@ -28,6 +28,8 @@ export default function SpinWheel({ onSpinEnd, disabled }) {
     if (!spinning) return
     const el = wheelRef.current
     if (!el) return
+
+    //This hnadler function is used to handle the transitionend event on the wheel element when spinning is false.
     const handler = () => {
       // Compute selected segment based on final angle
       const slice = 360 / segments.length
@@ -61,12 +63,12 @@ export default function SpinWheel({ onSpinEnd, disabled }) {
     if (reduced) {
       // With reduced motion, jump instantly and finish
       setAngle(next)
-      const slice = 360 / segments.length
-      const normalized = ((next % 360) + 360) % 360
-      const pointerAngle = ((360 - normalized) % 360 + 360) % 360
-      const epsilon = 0.0001
-      const idx = Math.floor((pointerAngle + epsilon) / slice) % segments.length
-      const selection = { name: segments[idx].name, color: segments[idx].color }
+      const slice = 360 / segments.length // Calculate the angle of each segment
+      const normalized = ((next % 360) + 360) % 360 // Normalize the angle to be between 0 and 360
+      const pointerAngle = ((360 - normalized) % 360 + 360) % 360 // Calculate the angle under the pointer relative to gradient start (12 o'clock)
+      const epsilon = 0.0001 // Use a tiny epsilon so exact boundaries resolve to the lower index
+      const idx = Math.floor((pointerAngle + epsilon) / slice) % segments.length // Calculate the index of the selected segment
+      const selection = { name: segments[idx].name, color: segments[idx].color } // Get the selected segment
       setSpinning(false)
       onSpinEnd?.(selection)
     } else {

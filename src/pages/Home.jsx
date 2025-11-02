@@ -5,11 +5,11 @@ import styles from './Home.module.scss'
 import ThemeToggle from '../components/ThemeToggle.jsx'
 
 export default function Home() {
-  const user = useAppSelector((s) => s.auth.user)
-  const mobile = useAppSelector((s) => s.auth.mobile)
-  const points = useAppSelector((s) => s.wallet.points)
-  const played = useAppSelector((s) => s.auth.sessionPlayed)
-  const dispatch = useAppDispatch()
+  const user = useAppSelector((s) => s.auth.user) // Get the user from the auth slice
+  const mobile = useAppSelector((s) => s.auth.mobile) || 'N/A' // Get the mobile number from the auth slice or default to 'N/A'
+  const points = useAppSelector((s) => s.wallet.points) || 0 // Get the points from the wallet slice or default to 0
+  const played = useAppSelector((s) => s.auth.sessionPlayed) || false // Get the sessionPlayed flag from the auth slice or default to false
+  const dispatch = useAppDispatch() // Get the dispatch function from the Redux store
 
   return (
     <main className={styles.container}>

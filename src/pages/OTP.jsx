@@ -8,17 +8,19 @@ import styles from './OTP.module.scss'
 import ThemeToggle from '../components/ThemeToggle.jsx'
 
 export default function OTP() {
-  const mobile = useAppSelector((s) => s.auth.mobile)
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-  const [otp, setOtp] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const mobile = useAppSelector((s) => s.auth.mobile) || 'N/A' // Get the mobile number from the auth slice or default to 'N/A'
+  const navigate = useNavigate() // Get the navigate function from the React Router DOM
+  const dispatch = useAppDispatch() // Get the dispatch function from the Redux store
+  const [otp, setOtp] = useState('') // State variable to store the OTP entered by the user
+  const [loading, setLoading] = useState(false) // State variable to track loading state
+  const [error, setError] = useState('') // State variable to store error messages
 
+  // Effect to redirect to login if mobile number is not available
   useEffect(() => {
     if (!mobile) navigate('/login')
   }, [mobile, navigate])
 
+  // Function to handle form submission
   const onSubmit = async (e) => {
     e.preventDefault()
     setError('')
@@ -35,16 +37,18 @@ export default function OTP() {
       })
       if (!res.ok) throw new Error('OTP verify failed')
       const data = await res.json()
-      dispatch(loginSuccess(data.user))
+      dispatch(loginSuccess(data.user)) // Dispatch loginSuccess action with user data
+
+      // Fetch wallet and rewards data concurrently
       const [walletRes, rewardsRes] = await Promise.all([
         fetch('/api/wallet'),
         fetch('/api/rewards'),
       ])
-      const walletData = await walletRes.json()
-      const rewardsData = await rewardsRes.json()
-      dispatch(setPoints(walletData.points))
-      dispatch(setRewards(rewardsData.rewards))
-      navigate('/')
+      const walletData = await walletRes.json() // Parse wallet response JSON
+      const rewardsData = await rewardsRes.json() // Parse rewards response JSON
+      dispatch(setPoints(walletData.points)) // Dispatch setPoints action with wallet points
+      dispatch(setRewards(rewardsData.rewards)) // Dispatch setRewards action with rewards data
+      navigate('/') // Redirect to home page
     } catch {
       setError('Verification failed. Try again.')
     } finally {
