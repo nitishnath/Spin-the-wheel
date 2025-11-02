@@ -53,9 +53,8 @@ A modern, mobile-first React mini‑app where authenticated users play a determi
 - No real backend or secure auth; MSW mocks only.
 - Deterministic reward is simple (digit sum); can be replaced with server logic.
 - Error handling is basic; user‑facing toasts only, per scope.
-- Dark mode toggle and PWA manifest are optional and not implemented.
 
 ## Time Log
 
-- Day 1: Scaffold, dependencies, routing, slices, MSW, basic pages and styles.
-- Day 2: Spin wheel, session rule, tests (unit + integration), refinements, README.
+- Day 1: folder structure and planned the UI design and BE API design with MSW, install all dependencies packages, routing
+- Day 2: redux toolkit, slices, login functionality, dashboard, session rule, spin wheel main functionality, unit + integration testing, refinements etc.
