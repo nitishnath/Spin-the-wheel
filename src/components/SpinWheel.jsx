@@ -3,7 +3,9 @@ import './SpinWheel.scss'
 
 //This function checks if the user prefers reduced motion and returns a boolean value, true if the user prefers reduced motion, false otherwise.
 function prefersReducedMotion() {
-  if (typeof window === 'undefined') return false
+  // In non-browser or test environments, prefer reduced motion
+  if (typeof window === 'undefined') return true
+  if (!window.matchMedia) return true
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 

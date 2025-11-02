@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import React from 'react'
 import { StoreProvider } from './provider.jsx'
 import store from './index.js'
@@ -26,7 +26,7 @@ describe('custom hooks', () => {
     )
     expect(screen.getByTestId('points').textContent).toBe('0')
     // trigger update
-    screen.getByText('Add').click()
+    fireEvent.click(screen.getByText('Add'))
     expect(screen.getByTestId('points').textContent).toBe('5')
   })
 })
